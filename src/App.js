@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 // with class
 // import React from 'react';
@@ -101,29 +101,29 @@ function App() {
           showAdd={showAddTask}
         />
 
-        <Route
-          path="/"
-          exact
-          render={props => (
-            <>
-              {/* && is a shorter ternary operator, only with true*/}
-              {showAddTask && <AddTask onAdd={addTask} />}
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <>
+                {/* && is a shorter ternary operator, only with true*/}
+                {showAddTask && <AddTask onAdd={addTask} />}
 
-              {tasks.length > 0 ? (
-                <Tasks
-                  tasks={tasks}
-                  onDelete={deleteTask}
-                  onToggle={toggleReminder}
-                />
-              ) : (
-                'No tasks to show'
-              )}
-            </>
-          )}
-        />
+                {tasks.length > 0 ? (
+                  <Tasks
+                    tasks={tasks}
+                    onDelete={deleteTask}
+                    onToggle={toggleReminder}
+                  />
+                ) : (
+                  'No tasks to show'
+                )}
+              </>
+            }
+          />
 
-        <Route path="/about" component={About} />
-
+          <Route path="/about" element={<About />} />
+        </Routes>
         <Footer />
       </div>
     </Router>
